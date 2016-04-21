@@ -22,7 +22,6 @@ I think it still came out nice. It feels sturdy, has nice weight to it and the v
   * .stl files for 3d printing the box, lid and potentiometer mounts
 
 ## Coming Soon:
-  * Full documentation of each level
   * I'll try to get a good video playthrough made
 
 ## Components List:
