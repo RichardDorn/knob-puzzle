@@ -1232,16 +1232,16 @@ void credits(){
 	delay(1500);
 	lcd.clear();
 	lcd.setCursor(16, 0);
-	lcd.print("To My Wonderful Mother");
+	lcd.print(" Scrolling  Dedication ");
 	for(int positionCounter = 0; positionCounter < 37; positionCounter++){
 		lcd.scrollDisplayLeft();
 		delay(350);
 	}
 	lcd.clear();
 	lcd.setCursor(16, 0);
-	lcd.print("    Vicki Jo    ");
+	lcd.print("    Centered    ");
 	lcd.setCursor(16, 1);
-	lcd.print("     Barker     ");
+	lcd.print("     Name!!     ");
 	for(int positionCounter = 0; positionCounter < 16; positionCounter++){
 		lcd.scrollDisplayLeft();
 		delay(300);
