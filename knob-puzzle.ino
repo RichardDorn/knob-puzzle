@@ -70,21 +70,21 @@ void loop() {
 ///////////////////////////////////////////////////////////////End Easter Egg///////////////////////////////////////////////////////////////////////////
 	if(skipState != lastSkipState){
 		if(skipState == HIGH && level < highestLevel && skips > 0){	//Skip Level
-		lastSkipState = skipState;
-		skips--;
-		digitalWrite(redLedPin, HIGH);
-		delay(30);
-		digitalWrite(redLedPin, LOW);
-		delay(30);
-		digitalWrite(redLedPin, HIGH);
-		delay(30);
-		digitalWrite(redLedPin, LOW);
-		delay(30);
-		digitalWrite(redLedPin, HIGH);
-		delay(30);
-		digitalWrite(redLedPin, LOW);
-		delay(30);
-		passLevel = 1;
+			lastSkipState = skipState;
+			skips--;
+			digitalWrite(redLedPin, HIGH);
+			delay(30);
+			digitalWrite(redLedPin, LOW);
+			delay(30);
+			digitalWrite(redLedPin, HIGH);
+			delay(30);
+			digitalWrite(redLedPin, LOW);
+			delay(30);
+			digitalWrite(redLedPin, HIGH);
+			delay(30);
+			digitalWrite(redLedPin, LOW);
+			delay(30);
+			passLevel = 1;
 		}else if(randMode == 0 && skipState == HIGH && level == highestLevel){	//Block skip on final level
 			lcd.clear();
 			lcd.print("You May Not Skip");
@@ -135,8 +135,222 @@ void loop() {
 		}
 		lastRandState = randState;
 	}
-//////////////////////////////////////////////////////////////////// Random Mode //////////////////////////////////////////////////////////////////////
-	if(randMode == 1 && passLevel == 0){
+//////////////////////////////////////////////////////////////////// Campaign Mode //////////////////////////////////////////////////////////////////////
+	if(randMode == 0 && passLevel == 0){
+		stats();	//Display current level and remaining skips
+		switch(level){
+			
+			case 1:{												//Level 1
+					angle = map(potVal3, 0, 1023, 0, 179);
+					myServo.write(angle);
+				}
+			break;
+			//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+			case 2:{												//Level 2
+					if(potVal1 >= 1020){
+						angle = map(potVal4, 0, 1023, 0, 179);
+						myServo.write(angle);
+					}
+			break;
+			}
+			//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+			case 3:{												//Level 3
+					int pot1 = map(potVal1, 0, 1023, 0, 179);
+					int pot2 = map(potVal2, 0, 1023, 0, 179);
+					int pot3 = map(potVal3, 0, 1023, 0, 179);
+					int pot4 = map(potVal4, 0, 1023, 0, 179);
+					angle = pot1 + pot2 + pot3 + pot4;
+					myServo.write(angle);
+					if(pot1 > 45){
+						angle = 0;
+						myServo.write(angle);
+					}
+					if(pot2 > 45){
+						angle = 0;
+						myServo.write(angle);
+					}
+					if(pot3 > 45){
+						angle = 0;
+						myServo.write(angle);
+					}
+					if(pot4 > 45){
+						angle = 0;
+						myServo.write(angle);
+					}
+			break;
+			}
+			//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+			case 4:{												//Level 4
+					if(potVal1 <=3 && potVal3 <= 3 && potVal4 <= 3){
+						angle = map(potVal2, 0, 1023, 0, 90);
+						myServo.write(angle);
+					}
+					if(potVal2 >= 1020 && potVal3 <= 3 && potVal4 <= 3){
+						angle = map(potVal1, 0, 1023, 90, 179);
+						myServo.write(angle);
+					}
+			break;
+			}
+			//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+			case 5:{												//Level 5
+					int firstHalf;
+					if(potVal2 <=3 && potVal3 <= 3 && potVal4 <= 3){
+						firstHalf = map(potVal1, 0, 1023, 0, 90);
+					if(firstHalf == 90){
+						angle = 90;
+						myServo.write(angle);
+					}
+					}
+					if(angle >= 88 && potVal1 <= 3 && potVal3 <= 3 && potVal2 <= 3){
+						angle = map(potVal4, 0, 1023, 90, 179);
+						myServo.write(angle);
+					}
+			break;
+			}
+			//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+			case 6:{												//Level 6
+					int firstQuarter;
+					int secondQuarter;
+					int thirdQuarter;
+					int fourthQuarter;
+					if(potVal2 <= 3 && potVal3 <= 3 && potVal4 <= 3){
+						firstQuarter = map(potVal1, 0, 1023, 0, 45);
+						if(firstQuarter == 45){
+							angle = 45;
+							myServo.write(angle);
+						}
+					}
+					if(angle >= 43 && potVal1 <= 3 && potVal3 <= 3 && potVal4 <= 3){
+						secondQuarter = map(potVal2, 0, 1023, 45, 90);
+						if(secondQuarter == 90){
+							angle = 90;
+							myServo.write(angle);
+						}
+					}
+					if(angle >= 88 && potVal1 <= 3 && potVal2 <= 3 && potVal4 <= 3){
+						thirdQuarter = map(potVal3, 0, 1023, 90, 135);
+						if(thirdQuarter == 135){
+							angle = 135;
+							myServo.write(angle);
+						}
+					}
+					if(angle >= 133 && potVal1 <= 3 && potVal2 <= 3 && potVal3 <= 3){
+						fourthQuarter = map(potVal4, 0, 1023, 135, 179);
+						if(fourthQuarter == 179){
+							angle = 179;
+							myServo.write(angle);
+						}
+					}
+			break;
+			}
+			//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+			case 7:{												//Level 7
+					if(potVal1 <= 3 && potVal3 <= 3 && potVal4 <= 3){
+						angle = map(potVal2, 0, 1023, 0, 178);
+						myServo.write(angle);
+					}
+					if(potVal2 >= 1020 && potVal1 <= 3 && potVal4 <= 3){
+						angle = map(potVal3, 0, 1023, 178, 0);
+						myServo.write(angle);
+					}
+					if(potVal2 >= 1020 && potVal3 >= 1020 && potVal4 <= 3){
+						angle = map(potVal1, 0, 1023, 0, 179);
+						myServo.write(angle);
+					}
+					if(angle == 179){
+						extraSkip();
+					}
+			break;
+			}
+			//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+			case 8:{												//Level 8
+					int key = map(potVal4, 0, 1023, 0, 135);
+					int add3 = map(potVal3, 0, 1023, 0, 40);
+					int add2 = map(potVal2, 0, 1023, 0, 60);
+					int add1 = map(potVal1, 0, 1023, 0, 35);
+					if(key >= 39 && key <= 44){
+						angle = add1 + add2 + add3 + key;
+						myServo.write(angle);
+					}
+					if(potVal3 <= 3 && potVal2 <= 3 && potVal1 <= 3 && key < 39 || key > 44){
+						angle = key;
+						myServo.write(angle);
+					}
+					if(potVal4 <=3 && potVal3 <=3 && potVal2 <= 3){
+						angle = add1;
+						myServo.write(angle);
+					}
+					if(potVal4 <=3 && potVal3 <=3 && potVal1 <= 3){
+						angle = add2;
+						myServo.write(angle);
+					}
+					if(potVal4 <=3 && potVal2 <=3 && potVal1 <= 3){
+						angle = add3;
+						myServo.write(angle);
+					}
+			break;
+			}
+			//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+			case 9:{												//Level 9
+					if(potVal1 <= 3 && potVal2 <= 3 && potVal3 <=3 && potVal4 <= 3){
+						angle = 178;
+						myServo.write(angle);
+					}else if(potVal1 > 3 && potVal2 <= 3 && potVal3 <=3 && potVal4 <= 3){
+						angle = map(potVal1, 0, 1023, 178, 0);
+						myServo.write(angle);
+					}else if(potVal2 > 3 && potVal1 <= 3 && potVal3 <=3 && potVal4 <= 3){
+						angle = map(potVal2, 0, 1023, 178, 0);
+						myServo.write(angle);
+					}else if(potVal3 > 3 && potVal1 <= 3 && potVal2 <=3 && potVal4 <= 3){
+						angle = map(potVal3, 0, 1023, 178, 0);
+						myServo.write(angle);
+					}else if(potVal4 > 3 && potVal1 <= 3 && potVal2 <=3 && potVal3 <= 3){
+						angle = map(potVal4, 0, 1023, 178, 0);
+						myServo.write(angle);
+					}else if(potVal2 >= 1020 && potVal1 <=3 && potVal3 <= 3){
+						angle = map(potVal4, 0, 1023, 0, 80);
+						myServo.write(angle);
+					}else if(potVal2 >= 1020 && potVal4 >= 1020 && potVal3 <= 3){
+						angle = map(potVal1, 0, 1023, 80, 160);
+						myServo.write(angle);
+					}else if(potVal2 >= 1020 && potVal4 >= 1020 && potVal1 >= 1020){
+						angle = map(potVal3, 0, 1023, 160, 179);
+						myServo.write(angle);
+					}
+			break;
+			}
+			//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+			case 10:{											//Level 10
+					int add = map(potVal1, 0, 1023, 0, 135);
+					int sub1 = map(potVal2, 0, 1023, 0, 179);
+					int sub2 = map(potVal3, 0, 1023, 0, 179);
+					int sub3 = map(potVal4, 0, 1023, 0, 179);
+					if(potVal1 > 3 && potVal2 <= 3 && potVal3 <= 3 && potVal4 <= 3){
+						angle = add;
+						myServo.write(angle);
+					}else if(potVal1 <= 3 && sub1 <= 43 && sub2 <= 45 && sub3 <= 45){
+						angle = 178 - sub1 - sub2 - sub3;
+						myServo.write(angle);
+					}else if(sub1 > 43){
+						angle = 178;
+						myServo.write(angle);
+					}else if(sub2 > 45){
+						angle = 178;
+						myServo.write(angle);
+					}else if(sub3 > 45){
+						angle = 178;
+						myServo.write(angle);
+					}else if(sub1 >= 40 && sub1 <= 50 && sub2 >= 40 && sub2 <= 50 && sub3 >= 40 && sub3 <= 50){
+						angle = 178 - sub1 - sub2 - sub3 + add;
+						myServo.write(angle);
+					}
+			break;
+			}
+			//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		} //Close switch(level)
+	} //close if(randMode == 0 && passLevel == 0)
+///////////////////////////////////////////////////////////////////////////// Random Mode ////////////////////////////////////////////////////////////////
+	else if(randMode == 1 && passLevel == 0){
 		randStats();	//Display random mode and remaining skips
 		switch(randLevel){
 		
@@ -896,221 +1110,7 @@ void loop() {
 			}
 		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		} //close switch(randLevel)
-	} //close if(randMode == 1)
-///////////////////////////////////////////////////////////////////////////// Normal Mode ////////////////////////////////////////////////////////////////
-	else if(randMode == 0 && passLevel == 0){
-		stats();	//Display current level and remaining skips
-		switch(level){
-			
-			case 1:{												//Level 1
-					angle = map(potVal3, 0, 1023, 0, 179);
-					myServo.write(angle);
-				}
-			break;
-			//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-			case 2:{												//Level 2
-					if(potVal1 >= 1020){
-						angle = map(potVal4, 0, 1023, 0, 179);
-						myServo.write(angle);
-					}
-			break;
-			}
-			//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-			case 3:{												//Level 3
-					int pot1 = map(potVal1, 0, 1023, 0, 179);
-					int pot2 = map(potVal2, 0, 1023, 0, 179);
-					int pot3 = map(potVal3, 0, 1023, 0, 179);
-					int pot4 = map(potVal4, 0, 1023, 0, 179);
-					angle = pot1 + pot2 + pot3 + pot4;
-					myServo.write(angle);
-					if(pot1 > 45){
-						angle = 0;
-						myServo.write(angle);
-					}
-					if(pot2 > 45){
-						angle = 0;
-						myServo.write(angle);
-					}
-					if(pot3 > 45){
-						angle = 0;
-						myServo.write(angle);
-					}
-					if(pot4 > 45){
-						angle = 0;
-						myServo.write(angle);
-					}
-			break;
-			}
-			//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-			case 4:{												//Level 4
-					if(potVal1 <=3 && potVal3 <= 3 && potVal4 <= 3){
-						angle = map(potVal2, 0, 1023, 0, 90);
-						myServo.write(angle);
-					}
-					if(potVal2 >= 1020 && potVal3 <= 3 && potVal4 <= 3){
-						angle = map(potVal1, 0, 1023, 90, 179);
-						myServo.write(angle);
-					}
-			break;
-			}
-			//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-			case 5:{												//Level 5
-					int firstHalf;
-					if(potVal2 <=3 && potVal3 <= 3 && potVal4 <= 3){
-						firstHalf = map(potVal1, 0, 1023, 0, 90);
-					if(firstHalf == 90){
-						angle = 90;
-						myServo.write(angle);
-					}
-					}
-					if(angle >= 88 && potVal1 <= 3 && potVal3 <= 3 && potVal2 <= 3){
-						angle = map(potVal4, 0, 1023, 90, 179);
-						myServo.write(angle);
-					}
-			break;
-			}
-			//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-			case 6:{												//Level 6
-					int firstQuarter;
-					int secondQuarter;
-					int thirdQuarter;
-					int fourthQuarter;
-					if(potVal2 <= 3 && potVal3 <= 3 && potVal4 <= 3){
-						firstQuarter = map(potVal1, 0, 1023, 0, 45);
-						if(firstQuarter == 45){
-							angle = 45;
-							myServo.write(angle);
-						}
-					}
-					if(angle >= 43 && potVal1 <= 3 && potVal3 <= 3 && potVal4 <= 3){
-						secondQuarter = map(potVal2, 0, 1023, 45, 90);
-						if(secondQuarter == 90){
-							angle = 90;
-							myServo.write(angle);
-						}
-					}
-					if(angle >= 88 && potVal1 <= 3 && potVal2 <= 3 && potVal4 <= 3){
-						thirdQuarter = map(potVal3, 0, 1023, 90, 135);
-						if(thirdQuarter == 135){
-							angle = 135;
-							myServo.write(angle);
-						}
-					}
-					if(angle >= 133 && potVal1 <= 3 && potVal2 <= 3 && potVal3 <= 3){
-						fourthQuarter = map(potVal4, 0, 1023, 135, 179);
-						if(fourthQuarter == 179){
-							angle = 179;
-							myServo.write(angle);
-						}
-					}
-			break;
-			}
-			//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-			case 7:{												//Level 7
-					if(potVal1 <= 3 && potVal3 <= 3 && potVal4 <= 3){
-						angle = map(potVal2, 0, 1023, 0, 178);
-						myServo.write(angle);
-					}
-					if(potVal2 >= 1020 && potVal1 <= 3 && potVal4 <= 3){
-						angle = map(potVal3, 0, 1023, 178, 0);
-						myServo.write(angle);
-					}
-					if(potVal2 >= 1020 && potVal3 >= 1020 && potVal4 <= 3){
-						angle = map(potVal1, 0, 1023, 0, 179);
-						myServo.write(angle);
-					}
-					if(angle == 179){
-						extraSkip();
-					}
-			break;
-			}
-			//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-			case 8:{												//Level 8
-					int key = map(potVal4, 0, 1023, 0, 135);
-					int add3 = map(potVal3, 0, 1023, 0, 40);
-					int add2 = map(potVal2, 0, 1023, 0, 60);
-					int add1 = map(potVal1, 0, 1023, 0, 35);
-					if(key >= 39 && key <= 44){
-						angle = add1 + add2 + add3 + key;
-						myServo.write(angle);
-					}
-					if(potVal3 <= 3 && potVal2 <= 3 && potVal1 <= 3 && key < 39 || key > 44){
-						angle = key;
-						myServo.write(angle);
-					}
-					if(potVal4 <=3 && potVal3 <=3 && potVal2 <= 3){
-						angle = add1;
-						myServo.write(angle);
-					}
-					if(potVal4 <=3 && potVal3 <=3 && potVal1 <= 3){
-						angle = add2;
-						myServo.write(angle);
-					}
-					if(potVal4 <=3 && potVal2 <=3 && potVal1 <= 3){
-						angle = add3;
-						myServo.write(angle);
-					}
-			break;
-			}
-			//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-			case 9:{												//Level 9
-					if(potVal1 <= 3 && potVal2 <= 3 && potVal3 <=3 && potVal4 <= 3){
-						angle = 178;
-						myServo.write(angle);
-					}else if(potVal1 > 3 && potVal2 <= 3 && potVal3 <=3 && potVal4 <= 3){
-						angle = map(potVal1, 0, 1023, 178, 0);
-						myServo.write(angle);
-					}else if(potVal2 > 3 && potVal1 <= 3 && potVal3 <=3 && potVal4 <= 3){
-						angle = map(potVal2, 0, 1023, 178, 0);
-						myServo.write(angle);
-					}else if(potVal3 > 3 && potVal1 <= 3 && potVal2 <=3 && potVal4 <= 3){
-						angle = map(potVal3, 0, 1023, 178, 0);
-						myServo.write(angle);
-					}else if(potVal4 > 3 && potVal1 <= 3 && potVal2 <=3 && potVal3 <= 3){
-						angle = map(potVal4, 0, 1023, 178, 0);
-						myServo.write(angle);
-					}else if(potVal2 >= 1020 && potVal1 <=3 && potVal3 <= 3){
-						angle = map(potVal4, 0, 1023, 0, 80);
-						myServo.write(angle);
-					}else if(potVal2 >= 1020 && potVal4 >= 1020 && potVal3 <= 3){
-						angle = map(potVal1, 0, 1023, 80, 160);
-						myServo.write(angle);
-					}else if(potVal2 >= 1020 && potVal4 >= 1020 && potVal1 >= 1020){
-						angle = map(potVal3, 0, 1023, 160, 179);
-						myServo.write(angle);
-					}
-			break;
-			}
-			//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-			case 10:{											//Level 10
-					int add = map(potVal1, 0, 1023, 0, 135);
-					int sub1 = map(potVal2, 0, 1023, 0, 179);
-					int sub2 = map(potVal3, 0, 1023, 0, 179);
-					int sub3 = map(potVal4, 0, 1023, 0, 179);
-					if(potVal1 > 3 && potVal2 <= 3 && potVal3 <= 3 && potVal4 <= 3){
-						angle = add;
-						myServo.write(angle);
-					}else if(potVal1 <= 3 && sub1 <= 43 && sub2 <= 45 && sub3 <= 45){
-						angle = 178 - sub1 - sub2 - sub3;
-						myServo.write(angle);
-					}else if(sub1 > 43){
-						angle = 178;
-						myServo.write(angle);
-					}else if(sub2 > 45){
-						angle = 178;
-						myServo.write(angle);
-					}else if(sub3 > 45){
-						angle = 178;
-						myServo.write(angle);
-					}else if(sub1 >= 40 && sub1 <= 50 && sub2 >= 40 && sub2 <= 50 && sub3 >= 40 && sub3 <= 50){
-						angle = 178 - sub1 - sub2 - sub3 + add;
-						myServo.write(angle);
-					}
-			break;
-			}
-			//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		} //Close switch(level)
-	} //close else if(randMode == 0 && passLevel == 0)
+	} //close else if(randMode == 1 && passLevel == 0)
 	
 	
 	if(angle >= 179){
