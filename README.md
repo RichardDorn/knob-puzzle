@@ -6,7 +6,7 @@
 
 This is my first arduino build outside of the starter kit and my first real attempt at coding in general. It is a puzzle game in which players must figure out the relationship between 4 knobs to move a single servo 180 degrees from left to right with the aid of an lcd displaying the current angle.
 
-The game can be played in Campaign Mode or Random Mode. Campaign consists of 10 levels and an "easter egg" to acces the credits after beating the final level. Random not only randomizes the level order but also the knob assignment within each level.
+The game can be played in Campaign Mode or Random Mode. Campaign consists of 10 levels and an "easter egg" to access the credits after beating the final level. Random not only randomizes the level order but also the knob assignment within each level.
 **I have tried to document the source code as clearly as possible. Most functionality questions are answered there.**
 
 The plastic components were designed in tinkercad and printed on a friend's DaVinci Jr. The finished product is 6" x 3.5" x 4". Total print time was 55-60 hours. [Box](https://www.tinkercad.com/things/bzaXPIe8NDD-box/edit), [Lid](https://www.tinkercad.com/things/7vqB7K1yFgU-lid/edit), [Pot Mounts](https://www.tinkercad.com/things/hdNZIUxdLzm-pot-mounts/edit)
