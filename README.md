@@ -1,5 +1,6 @@
 # Knob Puzzle
 
+![Breadboard-View Schematic](breadboard-view.PNG)
 ![Top Finsihed Knob Puzzle](build-pics/8-top-complete.JPG)
 ![Front Finished Knob Puzzle](build-pics/7-front-complete.JPG)
 
@@ -16,11 +17,11 @@ I think it still came out nice. It feels sturdy, has nice weight to it and the v
 
 ## This repository includes:
   * Source Code
+  * Breadboard-View Schematic
   * Pictures of the build process
   * .stl files for 3d printing the box, lid and potentiometer mounts
 
 ## Coming Soon:
-  * Fritzing schematic of circuit
   * Full documentation of each level
   * I'll try to get a good video playthrough made
 
