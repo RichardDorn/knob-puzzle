@@ -141,27 +141,27 @@ void loop() {
 		switch(level){
 			
 			case 1:{												//Level 1
-					angle = map(potVal3, 0, 1023, 0, 179);
+					angle = map(potVal3, 0, 1023, 0, 179);		//Pretty simple. Knob 3 moves the servo 180 deg. using the potentiometer's full range of motion.
 					myServo.write(angle);
 				}
 			break;
 			//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 			case 2:{												//Level 2
-					if(potVal1 >= 1020){
-						angle = map(potVal4, 0, 1023, 0, 179);
+					if(potVal1 >= 1020){						//If knob 1 is very close to max, knob 4 will run all the way to 179.
+						angle = map(potVal4, 0, 1023, 0, 179);		
 						myServo.write(angle);
 					}
 			break;
 			}
 			//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 			case 3:{												//Level 3
-					int pot1 = map(potVal1, 0, 1023, 0, 179);
+					int pot1 = map(potVal1, 0, 1023, 0, 179);		//The extra variables made it easier to write the if statements below without affecting angle	
 					int pot2 = map(potVal2, 0, 1023, 0, 179);
 					int pot3 = map(potVal3, 0, 1023, 0, 179);
 					int pot4 = map(potVal4, 0, 1023, 0, 179);
-					angle = pot1 + pot2 + pot3 + pot4;
+					angle = pot1 + pot2 + pot3 + pot4;				//All it takes is adding the knobs together but...
 					myServo.write(angle);
-					if(pot1 > 45){
+					if(pot1 > 45){									//If any of the knobs are turned past their 45 deg. allowance, servo resets.
 						angle = 0;
 						myServo.write(angle);
 					}
@@ -181,11 +181,11 @@ void loop() {
 			}
 			//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 			case 4:{												//Level 4
-					if(potVal1 <=3 && potVal3 <= 3 && potVal4 <= 3){
+					if(potVal1 <=3 && potVal3 <= 3 && potVal4 <= 3){		//If knob 1, 3 & 4 are low, 2 will run to 90 deg.	
 						angle = map(potVal2, 0, 1023, 0, 90);
 						myServo.write(angle);
 					}
-					if(potVal2 >= 1020 && potVal3 <= 3 && potVal4 <= 3){
+					if(potVal2 >= 1020 && potVal3 <= 3 && potVal4 <= 3){	//If knob 2 is all the way up while 3 and 4 are low, 1 will take it the rest of the way.
 						angle = map(potVal1, 0, 1023, 90, 179);
 						myServo.write(angle);
 					}
@@ -193,15 +193,15 @@ void loop() {
 			}
 			//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 			case 5:{												//Level 5
-					int firstHalf;
-					if(potVal2 <=3 && potVal3 <= 3 && potVal4 <= 3){
+					int firstHalf;														//If knob 2, 3 & 4 are low and 1 is max, servo will write 90.
+					if(potVal2 <=3 && potVal3 <= 3 && potVal4 <= 3){		
 						firstHalf = map(potVal1, 0, 1023, 0, 90);
-					if(firstHalf == 90){
-						angle = 90;
+					if(firstHalf == 90){												//Because there is nothing telling angle to change from 90 the servo will
+						angle = 90;														//remain in place when knob 1 is turned down.
 						myServo.write(angle);
 					}
 					}
-					if(angle >= 88 && potVal1 <= 3 && potVal3 <= 3 && potVal2 <= 3){
+					if(angle >= 88 && potVal1 <= 3 && potVal3 <= 3 && potVal2 <= 3){	//If angle is 90 and knob 1, 2 & 3 are low, 4 will take it the rest of the way.
 						angle = map(potVal4, 0, 1023, 90, 179);
 						myServo.write(angle);
 					}
@@ -209,7 +209,7 @@ void loop() {
 			}
 			//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 			case 6:{												//Level 6
-					int firstQuarter;
+					int firstQuarter;													//This is the same logic as level 5. Only you must do it with all 4 knobs in ascending order.
 					int secondQuarter;
 					int thirdQuarter;
 					int fourthQuarter;
@@ -245,27 +245,27 @@ void loop() {
 			}
 			//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 			case 7:{												//Level 7
-					if(potVal1 <= 3 && potVal3 <= 3 && potVal4 <= 3){
+					if(potVal1 <= 3 && potVal3 <= 3 && potVal4 <= 3){		//If all knobs are low 2 will take it just shy of winning.
 						angle = map(potVal2, 0, 1023, 0, 178);
 						myServo.write(angle);
 					}
-					if(potVal2 >= 1020 && potVal1 <= 3 && potVal4 <= 3){
+					if(potVal2 >= 1020 && potVal1 <= 3 && potVal4 <= 3){	//If 2 is max and 1 & 4 low, 3 will bring it back to zero.
 						angle = map(potVal3, 0, 1023, 178, 0);
 						myServo.write(angle);
 					}
-					if(potVal2 >= 1020 && potVal3 >= 1020 && potVal4 <= 3){
+					if(potVal2 >= 1020 && potVal3 >= 1020 && potVal4 <= 3){		//If 2 & 3 max and 4 low, 1 will run all the way to 179.
 						angle = map(potVal1, 0, 1023, 0, 179);
 						myServo.write(angle);
 					}
 					if(angle == 179){
-						extraSkip();
-					}
+						extraSkip();										//This proved to be the first level players had a hard time with so to reward
+					}														//those who do not skip it there is a bonus skip after completing the level.
 			break;
 			}
 			//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 			case 8:{												//Level 8
-					int key = map(potVal4, 0, 1023, 0, 135);
-					int add3 = map(potVal3, 0, 1023, 0, 40);
+					int key = map(potVal4, 0, 1023, 0, 135);									//Knob 1+2+3 = 135. If knob 4 is set to the difference between
+					int add3 = map(potVal3, 0, 1023, 0, 40);									//179 and 135 the other knobs will add onto it. Otherwise they are all limited.
 					int add2 = map(potVal2, 0, 1023, 0, 60);
 					int add1 = map(potVal1, 0, 1023, 0, 35);
 					if(key >= 39 && key <= 44){
@@ -292,10 +292,10 @@ void loop() {
 			}
 			//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 			case 9:{												//Level 9
-					if(potVal1 <= 3 && potVal2 <= 3 && potVal3 <=3 && potVal4 <= 3){
+					if(potVal1 <= 3 && potVal2 <= 3 && potVal3 <=3 && potVal4 <= 3){		//The level begins with the servo one shy of winning.
 						angle = 178;
 						myServo.write(angle);
-					}else if(potVal1 > 3 && potVal2 <= 3 && potVal3 <=3 && potVal4 <= 3){
+					}else if(potVal1 > 3 && potVal2 <= 3 && potVal3 <=3 && potVal4 <= 3){	//Each knob individually can run the servo back to zero.
 						angle = map(potVal1, 0, 1023, 178, 0);
 						myServo.write(angle);
 					}else if(potVal2 > 3 && potVal1 <= 3 && potVal3 <=3 && potVal4 <= 3){
@@ -304,16 +304,16 @@ void loop() {
 					}else if(potVal3 > 3 && potVal1 <= 3 && potVal2 <=3 && potVal4 <= 3){
 						angle = map(potVal3, 0, 1023, 178, 0);
 						myServo.write(angle);
-					}else if(potVal4 > 3 && potVal1 <= 3 && potVal2 <=3 && potVal3 <= 3){
+					}else if(potVal4 > 3 && potVal1 <= 3 && potVal2 <=3 && potVal3 <= 3){	
 						angle = map(potVal4, 0, 1023, 178, 0);
 						myServo.write(angle);
-					}else if(potVal2 >= 1020 && potVal1 <=3 && potVal3 <= 3){
+					}else if(potVal2 >= 1020 && potVal1 <=3 && potVal3 <= 3){				//If knob 2 is max and 1 & 3 or low, 4 runs to 80 deg.
 						angle = map(potVal4, 0, 1023, 0, 80);
 						myServo.write(angle);
-					}else if(potVal2 >= 1020 && potVal4 >= 1020 && potVal3 <= 3){
+					}else if(potVal2 >= 1020 && potVal4 >= 1020 && potVal3 <= 3){			//If 2 & 4 max and 3 low, 1 runs to 160 deg.
 						angle = map(potVal1, 0, 1023, 80, 160);
 						myServo.write(angle);
-					}else if(potVal2 >= 1020 && potVal4 >= 1020 && potVal1 >= 1020){
+					}else if(potVal2 >= 1020 && potVal4 >= 1020 && potVal1 >= 1020){		//If all others max, 3 runs to the end.
 						angle = map(potVal3, 0, 1023, 160, 179);
 						myServo.write(angle);
 					}
@@ -321,11 +321,11 @@ void loop() {
 			}
 			//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 			case 10:{											//Level 10
-					int add = map(potVal1, 0, 1023, 0, 135);
-					int sub1 = map(potVal2, 0, 1023, 0, 179);
-					int sub2 = map(potVal3, 0, 1023, 0, 179);
-					int sub3 = map(potVal4, 0, 1023, 0, 179);
-					if(potVal1 > 3 && potVal2 <= 3 && potVal3 <= 3 && potVal4 <= 3){
+					int add = map(potVal1, 0, 1023, 0, 135);										//Level begins with servo near winning again.	
+					int sub1 = map(potVal2, 0, 1023, 0, 179);										//Sum of knob 2,3 & 4 subtracts from 178 bringing servo closer to 0.
+					int sub2 = map(potVal3, 0, 1023, 0, 179);										//If any of those 3 goes beyond their limit, servo resets to 178.
+					int sub3 = map(potVal4, 0, 1023, 0, 179);										//If they are all at their limit (178-45-45-43 = 45), knob 1 will
+					if(potVal1 > 3 && potVal2 <= 3 && potVal3 <= 3 && potVal4 <= 3){				//add to the current angle. (45 + 135 = win!)
 						angle = add;
 						myServo.write(angle);
 					}else if(potVal1 <= 3 && sub1 <= 43 && sub2 <= 45 && sub3 <= 45){
