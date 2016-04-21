@@ -1,6 +1,6 @@
 # Knob Puzzle
 
-![Finsihed Knob Puzzle](build-pics/top-completed.jpg)
+![Finsihed Knob Puzzle](build-pics/8-top-complete.jpg)
 
 This is my first arduino build outside of the starter kit and my first real attempt at coding in general. It is a puzzle game in which players must figure out the relationship between 4 knobs to move a single servo 180 degrees from left to right with the aid of an lcd displaying the current angle.
 
