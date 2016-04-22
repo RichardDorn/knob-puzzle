@@ -41,7 +41,15 @@ I think it still came out nice. It feels sturdy, has nice weight to it and the v
 
 ## Room for improvement:
   * My measurements for all the components were a few mm off. This made it necessary to file the plastic down in many places in order to make things fit. I suggest measuring your own components and adjusting the .stl files accordingly.
+  
   * Due to time limitations on the available printer the box had to be split into 2 prints then glued together. The fit is less than perfect. I left the unsplit box in the box.stl file incase print time isn't an issue.
+ 
+  * A big improvement to the UX could be made by redesigning the box with the potentiometers mounted vertically out of the face of the box. If you're a lefty its no big deal but for the majority who will manipulate the knobs with their right hand, the servo becomes difficult to see.
+ 
+  * Similar improvement could be made to the lcd. You must be looking from a birds-eye view to see the screen. Mounting it with a slight tilt would make playing much more relaxing.
+ 
   * The code can still be streamlined with a little work. Currently the levels are written twice... once for campaign and again for random mode.
+
   * Would be great to add sd functionality and easily switch between "level packs" rather than upload new code to arduino each time.
+
   * Using smaller 18AWG wire might make it easier to stuff inside the small box.
