@@ -264,15 +264,15 @@ void loop() {
 			}
 			//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 			case 8:{												//Level 8
-					int key = map(potVal4, 0, 1023, 0, 135);									//Knob 1+2+3 = 135. If knob 4 is set to the difference between
-					int add3 = map(potVal3, 0, 1023, 0, 40);									//179 and 135 the other knobs will add onto it. Otherwise they are all limited.
+					int key = map(potVal4, 0, 1023, 0, 135);									//Knob 1+2+3 = 135. If knob 4 is set to 45...
+					int add3 = map(potVal3, 0, 1023, 0, 40);									//the other knobs will add onto it. Otherwise they are all limited.
 					int add2 = map(potVal2, 0, 1023, 0, 60);
 					int add1 = map(potVal1, 0, 1023, 0, 35);
-					if(key >= 39 && key <= 44){
+					if(key >= 39 && key <= 45){
 						angle = add1 + add2 + add3 + key;
 						myServo.write(angle);
 					}
-					if(potVal3 <= 3 && potVal2 <= 3 && potVal1 <= 3 && key < 39 || key > 44){
+					if(potVal3 <= 3 && potVal2 <= 3 && potVal1 <= 3 && key < 39 || key > 45){
 						angle = key;
 						myServo.write(angle);
 					}
@@ -324,23 +324,23 @@ void loop() {
 					int add = map(potVal1, 0, 1023, 0, 135);										//Level begins with servo near winning again.	
 					int sub1 = map(potVal2, 0, 1023, 0, 179);										//Sum of knob 2,3 & 4 subtracts from 178 bringing servo closer to 0.
 					int sub2 = map(potVal3, 0, 1023, 0, 179);										//If any of those 3 goes beyond their limit, servo resets to 178.
-					int sub3 = map(potVal4, 0, 1023, 0, 179);										//If they are all at their limit (178-45-45-43 = 45), knob 1 will
+					int sub3 = map(potVal4, 0, 1023, 0, 179);										//If all three are at their limit (178-45-45-43 = 45), knob 1 will
 					if(potVal1 > 3 && potVal2 <= 3 && potVal3 <= 3 && potVal4 <= 3){				//add to the current angle. (45 + 135 = win!)
 						angle = add;
 						myServo.write(angle);
-					}else if(potVal1 <= 3 && sub1 <= 43 && sub2 <= 45 && sub3 <= 45){
+					}else if(potVal1 <= 3 && sub1 <= 45 && sub2 <= 45 && sub3 <= 43){
 						angle = 178 - sub1 - sub2 - sub3;
 						myServo.write(angle);
-					}else if(sub1 > 43){
+					}else if(sub1 > 45){
 						angle = 178;
 						myServo.write(angle);
 					}else if(sub2 > 45){
 						angle = 178;
 						myServo.write(angle);
-					}else if(sub3 > 45){
+					}else if(sub3 > 43){
 						angle = 178;
 						myServo.write(angle);
-					}else if(sub1 >= 40 && sub1 <= 50 && sub2 >= 40 && sub2 <= 50 && sub3 >= 40 && sub3 <= 50){
+					}else if(sub1 >= 40 && sub1 <= 45 && sub2 >= 40 && sub2 <= 45 && sub3 >= 40 && sub3 <= 43){
 						angle = 178 - sub1 - sub2 - sub3 + add;
 						myServo.write(angle);
 					}
@@ -803,11 +803,11 @@ void loop() {
 							int add3 = map(potVal3, 0, 1023, 0, 40);
 							int add2 = map(potVal2, 0, 1023, 0, 60);
 							int add1 = map(potVal1, 0, 1023, 0, 35);
-							if(key >= 39 && key <= 44){
+							if(key >= 39 && key <= 45){
 								angle = add1 + add2 + add3 + key;
 								myServo.write(angle);
 							}
-							if(potVal3 <= 3 && potVal2 <= 3 && potVal1 <= 3 && key < 39 || key > 44){
+							if(potVal3 <= 3 && potVal2 <= 3 && potVal1 <= 3 && key < 39 || key > 45){
 								angle = key;
 								myServo.write(angle);
 							}
@@ -831,11 +831,11 @@ void loop() {
 							int add3 = map(potVal4, 0, 1023, 0, 40);
 							int add2 = map(potVal2, 0, 1023, 0, 60);
 							int add1 = map(potVal1, 0, 1023, 0, 35);
-							if(key >= 39 && key <= 44){
+							if(key >= 39 && key <= 45){
 								angle = add1 + add2 + add3 + key;
 								myServo.write(angle);
 							}
-							if(potVal4 <= 3 && potVal2 <= 3 && potVal1 <= 3 && key < 39 || key > 44){
+							if(potVal4 <= 3 && potVal2 <= 3 && potVal1 <= 3 && key < 39 || key > 45){
 								angle = key;
 								myServo.write(angle);
 							}
@@ -859,11 +859,11 @@ void loop() {
 							int add3 = map(potVal3, 0, 1023, 0, 40);
 							int add2 = map(potVal4, 0, 1023, 0, 60);
 							int add1 = map(potVal1, 0, 1023, 0, 35);
-							if(key >= 39 && key <= 44){
+							if(key >= 39 && key <= 45){
 								angle = add1 + add2 + add3 + key;
 								myServo.write(angle);
 							}
-							if(potVal4 <= 3 && potVal3 <= 3 && potVal1 <= 3 && key < 39 || key > 44){
+							if(potVal4 <= 3 && potVal3 <= 3 && potVal1 <= 3 && key < 39 || key > 45){
 								angle = key;
 								myServo.write(angle);
 							}
@@ -887,11 +887,11 @@ void loop() {
 							int add3 = map(potVal3, 0, 1023, 0, 40);
 							int add2 = map(potVal2, 0, 1023, 0, 60);
 							int add1 = map(potVal4, 0, 1023, 0, 35);
-							if(key >= 39 && key <= 44){
+							if(key >= 39 && key <= 45){
 								angle = add1 + add2 + add3 + key;
 								myServo.write(angle);
 							}
-							if(potVal4 <= 3 && potVal3 <= 3 && potVal2 <= 3 && key < 39 || key > 44){
+							if(potVal4 <= 3 && potVal3 <= 3 && potVal2 <= 3 && key < 39 || key > 45){
 								angle = key;
 								myServo.write(angle);
 							}
@@ -1005,19 +1005,19 @@ void loop() {
 							if(potVal1 > 3 && potVal2 <= 3 && potVal3 <= 3 && potVal4 <= 3){
 								angle = add;
 								myServo.write(angle);
-							}else if(potVal1 <= 3 && sub1 <= 43 && sub2 <= 45 && sub3 <= 45){
+							}else if(potVal1 <= 3 && sub1 <= 45 && sub2 <= 45 && sub3 <= 43){
 								angle = 178 - sub1 - sub2 - sub3;
 								myServo.write(angle);
-							}else if(sub1 > 43){
+							}else if(sub1 > 45){
 								angle = 178;
 								myServo.write(angle);
 							}else if(sub2 > 45){
 								angle = 178;
 								myServo.write(angle);
-							}else if(sub3 > 45){
+							}else if(sub3 > 43){
 								angle = 178;
 								myServo.write(angle);
-							}else if(sub1 >= 40 && sub1 <= 50 && sub2 >= 40 && sub2 <= 50 && sub3 >= 40 && sub3 <= 50){
+							}else if(sub1 >= 40 && sub1 <= 45 && sub2 >= 40 && sub2 <= 45 && sub3 >= 40 && sub3 <= 43){
 								angle = 178 - sub1 - sub2 - sub3 + add;
 								myServo.write(angle);
 							}
@@ -1032,19 +1032,19 @@ void loop() {
 							if(potVal2 > 3 && potVal1 <= 3 && potVal3 <= 3 && potVal4 <= 3){
 								angle = add;
 								myServo.write(angle);
-							}else if(potVal2 <= 3 && sub1 <= 43 && sub2 <= 45 && sub3 <= 45){
+							}else if(potVal2 <= 3 && sub1 <= 45 && sub2 <= 45 && sub3 <= 43){
 								angle = 178 - sub1 - sub2 - sub3;
 								myServo.write(angle);
-							}else if(sub1 > 43){
+							}else if(sub1 > 45){
 								angle = 178;
 								myServo.write(angle);
 							}else if(sub2 > 45){
 								angle = 178;
 								myServo.write(angle);
-							}else if(sub3 > 45){
+							}else if(sub3 > 43){
 								angle = 178;
 								myServo.write(angle);
-							}else if(sub1 >= 40 && sub1 <= 50 && sub2 >= 40 && sub2 <= 50 && sub3 >= 40 && sub3 <= 50){
+							}else if(sub1 >= 40 && sub1 <= 45 && sub2 >= 40 && sub2 <= 45 && sub3 >= 40 && sub3 <= 43){
 								angle = 178 - sub1 - sub2 - sub3 + add;
 								myServo.write(angle);
 							}
@@ -1059,19 +1059,19 @@ void loop() {
 							if(potVal3 > 3 && potVal1 <= 3 && potVal2 <= 3 && potVal4 <= 3){
 								angle = add;
 								myServo.write(angle);
-							}else if(potVal3 <= 3 && sub1 <= 43 && sub2 <= 45 && sub3 <= 45){
+							}else if(potVal3 <= 3 && sub1 <= 45 && sub2 <= 45 && sub3 <= 43){
 								angle = 178 - sub1 - sub2 - sub3;
 								myServo.write(angle);
-							}else if(sub1 > 43){
+							}else if(sub1 > 45){
 								angle = 178;
 								myServo.write(angle);
 							}else if(sub2 > 45){
 								angle = 178;
 								myServo.write(angle);
-							}else if(sub3 > 45){
+							}else if(sub3 > 43){
 								angle = 178;
 								myServo.write(angle);
-							}else if(sub1 >= 40 && sub1 <= 50 && sub2 >= 40 && sub2 <= 50 && sub3 >= 40 && sub3 <= 50){
+							}else if(sub1 >= 40 && sub1 <= 45 && sub2 >= 40 && sub2 <= 45 && sub3 >= 40 && sub3 <= 43){
 								angle = 178 - sub1 - sub2 - sub3 + add;
 								myServo.write(angle);
 							}
@@ -1086,19 +1086,19 @@ void loop() {
 							if(potVal4 > 3 && potVal1 <= 3 && potVal2 <= 3 && potVal3 <= 3){
 								angle = add;
 								myServo.write(angle);
-							}else if(potVal4 <= 3 && sub1 <= 43 && sub2 <= 45 && sub3 <= 45){
+							}else if(potVal4 <= 3 && sub1 <= 45 && sub2 <= 45 && sub3 <= 43){
 								angle = 178 - sub1 - sub2 - sub3;
 								myServo.write(angle);
-							}else if(sub1 > 43){
+							}else if(sub1 > 45){
 								angle = 178;
 								myServo.write(angle);
 							}else if(sub2 > 45){
 								angle = 178;
 								myServo.write(angle);
-							}else if(sub3 > 45){
+							}else if(sub3 > 43){
 								angle = 178;
 								myServo.write(angle);
-							}else if(sub1 >= 40 && sub1 <= 50 && sub2 >= 40 && sub2 <= 50 && sub3 >= 40 && sub3 <= 50){
+							}else if(sub1 >= 40 && sub1 <= 45 && sub2 >= 40 && sub2 <= 45 && sub3 >= 40 && sub3 <= 45){
 								angle = 178 - sub1 - sub2 - sub3 + add;
 								myServo.write(angle);
 							}
@@ -1163,6 +1163,7 @@ void nextLevel(){
 	}
 }
 void extraSkip(){
+	myServo.write(0);
 	skips++;
 	lcd.clear();
 	lcd.print("You  Earned  An ");
